@@ -84,10 +84,7 @@ contract EwasteTracker {
             StkTypes.Retailer,
             StkTypes.CollectionCenter
         ];
-        stkAllowedTransfers[StkTypes.Retailer] = [
-            // TODO: TO CONSUMER (maybe not)
-            StkTypes.CollectionCenter
-        ];
+        stkAllowedTransfers[StkTypes.Retailer] = [StkTypes.CollectionCenter];
         stkAllowedTransfers[StkTypes.CollectionCenter] = [
             StkTypes.Producer,
             StkTypes.RecyclingUnit
@@ -269,7 +266,6 @@ contract EwasteTracker {
             devices[_UID].owner == msg.sender,
             "You don't own this device!"
         );
-        // if _deviceType not equal to devices[_UID].deviceType
         if (devices[_UID].deviceType != _deviceType) {
             // remove device from list of devices owned by the stakeholder
             removeDeviceFromList(_UID, msg.sender);
@@ -283,7 +279,6 @@ contract EwasteTracker {
     // 2-PARTY FUNCTIONS //
 
     // transfer device ownership
-    // NOTE: removed modifier: onlyAllowedStakeholders([1, 1, 1, 0, 1])
     function transferDeviceOwnership(string memory _UID, address _newOwner)
         private
     {
